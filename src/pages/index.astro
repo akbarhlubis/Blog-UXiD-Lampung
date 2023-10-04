@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "astro-icon";
+const pageTitle = "UXiD Lampung";
+---
+<BaseLayout pageTitle={pageTitle}>
+	<!-- Hero Section -->
+	<div class="hero flex-col flex px-20 mt-40 items-center justify-center md:w-2/4 md:mx-auto w-full content-center">
+		<div class="center min-h-screen flex flex-col gap-2">
+			<h1 class="text-white text-sm md:text-lg leading-loose">
+				<b class="text-6xl text-secondary">Halo,</b>
+				<br class="font-light">
+				UXiD Chapter Lampung merupakan komunitas terbuka nirlaba seputar User Experience yang berlokasi di provinsi Lampung.
+			</h1>
+			<div class="flex flex-col text-center gap-2">
+				<button onclick="join.showModal()" class="btn rounded-md hover:bg-secondary hover:text-primary cursor-pointer w-full p-2 font-bold">Gabung UXiD Lampung</button>
+				<dialog id="join" class="modal">
+					<div class="modal-box">
+					  <form method="dialog">
+						<button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+					  </form>
+					  <h3 class="font-bold text-lg">Welcome!</h3>
+					  <div class="JoinGroup justify-center gap-5 flex mt-2">
+						<a class="w-fit flex gap-2 hover:bg-primary rounded-md px-4 py-2 hover:text-white hover:scale-105" href="https://chat.whatsapp.com/C260xWeLjGFFLCFJfl05Wd">
+							<Icon name="mdi:whatsapp" class="w-6 h-6"></Icon>
+							Grup Whatsapp</a>
+						<a class="w-fit flex gap-2 hover:bg-primary rounded-md px-4 py-2 hover:text-white hover:scale-105" href="https://chat.whatsapp.com/C260xWeLjGFFLCFJfl05Wd">
+							<Icon name="mdi:telegram" class="w-6 h-6"></Icon>
+							Grup Telegram</a>
+					  </div>
+					</div>
+				  </dialog>
+				<div class="text-white font-bold">Pelajari Lebih Lanjut > </div>
+			</div>
+		</div>
+	</div>
+</BaseLayout>

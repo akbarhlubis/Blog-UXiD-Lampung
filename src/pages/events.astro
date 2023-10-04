@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CardEvent from "../components/CardEvent.astro";
+
+const allPosts = await Astro.glob("./events/*.md")
+
+const pageTitle = "Event";
+// console.log(allPosts);
+
+---
+<BaseLayout pageTitle={pageTitle}>
+	<!-- Blog Section -->
+	<div class="container min-h-screen my-12 mx-auto px-4 md:px-12">
+		<h1 class="text-center text-4xl text-secondary font-black">{pageTitle} Page</h1>
+		<div class="flex flex-wrap mt-5 -mx-1 lg:-mx-4">
+			{allPosts.map((post)=>
+				<CardEvent transition:animate="none" title={post.frontmatter.title} category={post.frontmatter.category} url={post.url} pubDate={post.frontmatter.pubDate}/>
+			)}
+		</div>
+	</div>
+
+</BaseLayout>

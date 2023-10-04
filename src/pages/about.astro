@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pageTitle = "About";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+	<!-- Blog Section -->
+	<div class="container min-h-screen my-12 mx-auto px-4 md:px-12">
+        <h1 class="text-center text-4xl text-secondary font-black">{pageTitle} Page</h1>
+        <article class="md:w-3/5 w-full mx-auto md:text-base text-sm text-white">
+            <h2 class="mt-10 font-semibold text-lg">Title</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti natus, commodi error alias obcaecati illo nemo fugiat ullam dolores sequi.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti natus, commodi error alias obcaecati illo nemo fugiat ullam dolores sequi.</p>
+            <h2 class="mt-4 font-semibold text-lg">Title</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti natus, commodi error alias obcaecati illo nemo fugiat ullam dolores sequi.</p>
+        </article>
+	</div>
+
+</BaseLayout>

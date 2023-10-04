@@ -1,0 +1,15 @@
+// get all data from api endpoint
+type Post = {
+	items:[{
+		index: number;
+		title: string;
+		pubDate: number;
+		description: string;
+		author: string;
+		status: string;
+	}]
+};
+const res = await fetch("https://script.google.com/macros/s/AKfycbyM6zGfiOzQcstnckx5NMZ0OdLbrLoGr_7-zSGS5eA3pQNyNWis7EhSBSIpY9rVXX89Mg/exec?sheet=blog");
+const res = await fetch("https://opensheet.elk.sh/1-XxaQVrv8CO-SN4Ac1KLRGjPXc4-IIOAHG_W2CMd750/blog");
+const allPosts:Post[] = await res.json();
+console.log(allPosts);

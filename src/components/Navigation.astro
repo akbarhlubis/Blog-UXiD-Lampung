@@ -1,0 +1,42 @@
+---
+import PrimaryLogo from "../components/PrimaryLogo.astro";
+import SecondaryLogo from "../components/SecondaryLogo.astro";
+import {Icon} from "astro-icon";
+// create a new URL object using the request URL
+// const PathName = new URL(Astro.request.url).pathname;
+// then get the pathname from the URL object
+// const currentPath = PathName.slice(1);
+// or you can use Astro.url.pathname
+const currentPath = Astro.url.pathname;
+// get the main path for example /blog/*/* => /blog
+const mainPath = currentPath.split("/")[1];
+console.log(mainPath);
+---
+<div class="navbar flex px-20 py-5 justify-center md:justify-between content-center">
+    <SecondaryLogo/>
+    <div class="hidden md:flex nav-item gap-6 text-white items-center font-medium">
+        <div><a class={mainPath === ""?"border-b-2 font-bold text-secondary":""} href="/">Beranda</a></div>
+        <div><a class={mainPath === "events"?"border-b-2 font-bold text-secondary":""} href="/events">Kegiatan</a></div>
+        <div><a class={mainPath === "blogs"?"border-b-2 font-bold text-secondary":""} href="/blogs">Blog</a></div>
+        <div><a class={mainPath === "about"?"border-b-2 font-bold text-secondary":""} href="/about">Tentang Kami</a></div>
+        <!-- the way to read ternary condition above is if mainPath is the name of path then implement class otherwise is null -->
+    </div>
+</div>
+
+<!-- fixed nav -->
+<nav
+  class="md:hidden fixed bottom-0 inset-x-0 bg-white rounded-t-xl flex justify-between text-sm text-primary uppercase font-mono"
+>
+<a href="/" class="w-full block py-5 px-3 text-center hover:bg-secondary hover:text-white transition duration-300">
+    <Icon class="w-6 h-6 mb-2 mx-auto" name="mdi:home"/>
+    Beranda</a>
+<a href="/events" class="w-full block py-5 px-3 text-center hover:bg-secondary hover:text-white transition duration-300">
+    <Icon class="w-6 h-6 mb-2 mx-auto" name="mdi:event"/>
+    Kegiatan</a>
+<a href="/blogs" class="w-full block py-5 px-3 text-center hover:bg-secondary hover:text-white transition duration-300">
+    <Icon class="w-6 h-6 mb-2 mx-auto" name="mdi:pen"/>
+    Blog</a>
+<a href="/about" class="w-full truncate block py-5 px-3 text-center hover:bg-secondary hover:text-white transition duration-300">
+    <Icon class="w-6 h-6 mb-2 mx-auto" name="mdi:person"/>
+    Tentang Kami</a>
+</nav>
