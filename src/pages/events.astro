@@ -14,7 +14,7 @@ const pageTitle = "Event";
 		<h1 class="text-center text-4xl text-secondary font-black">{pageTitle} Page</h1>
 		<div class="flex flex-wrap mt-5 -mx-1 lg:-mx-4">
 			{allPosts.map((post)=>
-				<CardEvent transition:animate="none" title={post.frontmatter.title} category={post.frontmatter.category} url={post.url} pubDate={post.frontmatter.pubDate}/>
+				<CardEvent transition:animate="none" image={post.frontmatter.image} title={post.frontmatter.title} category={post.frontmatter.category} url={post.url} pubDate={post.frontmatter.pubDate}/>
 			)}
 		</div>
 	</div>
