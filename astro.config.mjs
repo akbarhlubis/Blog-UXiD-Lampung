@@ -9,52 +9,42 @@ export default defineConfig({
     tailwind(), 
     alpinejs(),
     AstroPWA({
-      devOptions: {
-        enabled: true
-      },
-      manifest:{
-        name: 'UXiD Lampung',
-        short_name: 'UXiD Lampung',
-        description: 'Website komunitas UX Indonesia Lampung',
-        theme_color: '#F5F6F7',
-        background_color: '#F5F6F7',
+        mode: 'development',
+        base: '/',
         scope: '/',
-        start_url: '/',
-        screenshots: [
+        includeAssets: ['favicon.svg'],
+        registerType: 'autoUpdate',
+        manifest: {
+          name: 'UXiD Lampung',
+          short_name: 'UXiD Lampung',
+          theme_color: '#ffffff',
+          icons: [
             {
-                src: '/iconPWA.png',
-                sizes: '512x512',
-                type: 'image/png',
-                purpose: "any maskable"
-            }
-        ],
-        // menambahkan icon
-        icons: [
+              src: 'pwa-192x192.png',
+              sizes: '192x192',
+              type: 'image/png',
+            },
             {
-                src: '/iconPWA.png',
-                sizes: '512x512',
-                type: 'image/png',
-                purpose: "any maskable"
-            }
-        ],
-        // menambahkan shortcut ke homescreen
-        shortcuts: [
+              src: 'pwa-512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+            },
             {
-                name: 'My Shortcut',
-                short_name: 'Shortcut',
-                description: 'A shortcut that opens the app',
-                url: '/',
-                icons: [
-                    {
-                        src: 'public/pwa-512x512.png',
-                        sizes: '512x512',
-                        type: 'image/png',
-                        purpose: "any maskable"
-                    }
-                ]
-            }
-        ]
-    },
+              src: 'pwa-512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+              purpose: 'any maskable',
+            },
+          ],
+        },
+        workbox: {
+          navigateFallback: '/404',
+          globPatterns: ['**/*.{css,js,html,svg,png,ico,txt}'],
+        },
+        devOptions: {
+          enabled: true,
+          navigateFallbackAllowlist: [/^\/404$/],
+        },
     }),
   ],
 });

@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "generate-pwa-assets": "pwa-assets-generator --preset minimal public/iconPWA.png"
+    "generate-pwa-assets": "pwa-assets-generator --preset minimal src/assets/UXiD_lampung_Full.svg"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.3.0",
