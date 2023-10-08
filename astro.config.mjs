@@ -13,9 +13,9 @@ export default defineConfig({
         enabled: true
       },
       manifest:{
-        name: 'Laravel PWA App',
-        short_name: 'Laravel PWA',
-        description: 'My Awesome App description',
+        name: 'UXiD Lampung',
+        short_name: 'UXiD Lampung',
+        description: 'Website komunitas UX Indonesia Lampung',
         theme_color: '#F5F6F7',
         background_color: '#F5F6F7',
         scope: '/',
