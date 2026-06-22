@@ -3,7 +3,7 @@ import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 import { withBase } from "../lib/url";
 
-const {pageTitle} = Astro.props;
+const { pageTitle, pageDescription = "UXiD Lampung adalah komunitas UX di Lampung yang berbagi event, diskusi, dan konten belajar." } = Astro.props;
 const faviconHref = withBase("/favicon.svg");
 ---
 
@@ -12,6 +12,7 @@ const faviconHref = withBase("/favicon.svg");
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href={faviconHref} />
     <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={pageDescription} />
     <meta name="generator" content={Astro.generator} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,7 +24,9 @@ const faviconHref = withBase("/favicon.svg");
 	<!-- Navigation -->
 	<Navigation />
     <!-- Content -->
-    <slot/>
+    <main>
+      <slot/>
+    </main>
 	<!-- Footer -->
 	<Footer />
     <!-- Bottom Nav -->
