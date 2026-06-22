@@ -10,30 +10,72 @@ const eventsHref = withBase("/events");
 const blogsHref = withBase("/blogs");
 const aboutHref = withBase("/about");
 ---
-<div class="navbar flex px-20 py-5 justify-center md:justify-between content-center">
+<div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-8 lg:px-12">
+  <a href={homeHref} class="inline-flex items-center gap-3">
     <SecondaryLogo/>
-    <div class="hidden md:flex nav-item gap-6 text-white items-center font-medium">
-        <div><a class={mainPath === ""?"border-b-2 font-bold text-secondary":""} href={homeHref}>Beranda</a></div>
-        <div><a class={mainPath === "events"?"border-b-2 font-bold text-secondary":""} href={eventsHref}>Kegiatan</a></div>
-        <div><a class={mainPath === "blogs"?"border-b-2 font-bold text-secondary":""} href={blogsHref}>Blog</a></div>
-        <div><a class={mainPath === "about"?"border-b-2 font-bold text-secondary":""} href={aboutHref}>Tentang Kami</a></div>
-    </div>
+    <span class="sr-only">UXiD Lampung</span>
+  </a>
+
+  <div class="hidden items-center gap-2 rounded-full border border-white/10 bg-white/5 p-1 text-sm font-semibold text-white md:flex">
+    <a
+      class={`rounded-full px-4 py-2 transition ${mainPath === "" ? "bg-secondary text-slate-950" : "text-white/75 hover:text-white"}`}
+      href={homeHref}
+    >
+      Beranda
+    </a>
+    <a
+      class={`rounded-full px-4 py-2 transition ${mainPath === "events" ? "bg-secondary text-slate-950" : "text-white/75 hover:text-white"}`}
+      href={eventsHref}
+    >
+      Kegiatan
+    </a>
+    <a
+      class={`rounded-full px-4 py-2 transition ${mainPath === "blogs" ? "bg-secondary text-slate-950" : "text-white/75 hover:text-white"}`}
+      href={blogsHref}
+    >
+      Blog
+    </a>
+    <a
+      class={`rounded-full px-4 py-2 transition ${mainPath === "about" ? "bg-secondary text-slate-950" : "text-white/75 hover:text-white"}`}
+      href={aboutHref}
+    >
+      Tentang Kami
+    </a>
+  </div>
 </div>
 
 <!-- fixed nav -->
 <nav
-  class="md:hidden fixed bottom-0 inset-x-0 bg-white rounded-t-xl flex justify-between text-sm text-primary uppercase font-mono"
+  class="md:hidden fixed bottom-0 inset-x-0 z-40 border-t border-white/10 bg-slate-950/95 text-sm text-white backdrop-blur-xl"
 >
-<a href={homeHref} class="w-full block py-5 px-3 text-center hover:bg-secondary hover:text-white transition duration-300">
-    <Icon class="w-6 h-6 mb-2 mx-auto" name="mdi:home"/>
-    Beranda</a>
-<a href={eventsHref} class="w-full block py-5 px-3 text-center hover:bg-secondary hover:text-white transition duration-300">
-    <Icon class="w-6 h-6 mb-2 mx-auto" name="mdi:event"/>
-    Kegiatan</a>
-<a href={blogsHref} class="w-full block py-5 px-3 text-center hover:bg-secondary hover:text-white transition duration-300">
-    <Icon class="w-6 h-6 mb-2 mx-auto" name="mdi:pen"/>
-    Blog</a>
-<a href={aboutHref} class="w-full truncate block py-5 px-3 text-center hover:bg-secondary hover:text-white transition duration-300">
-    <Icon class="w-6 h-6 mb-2 mx-auto" name="mdi:person"/>
-    Tentang Kami</a>
+  <div class="grid grid-cols-4">
+    <a
+      href={homeHref}
+      class={`flex flex-col items-center gap-1 px-3 py-3 text-center transition ${mainPath === "" ? "text-secondary" : "text-white/75 hover:text-white"}`}
+    >
+      <Icon class="h-5 w-5" name="mdi:home"/>
+      <span class="truncate text-[11px] font-semibold">Beranda</span>
+    </a>
+    <a
+      href={eventsHref}
+      class={`flex flex-col items-center gap-1 px-3 py-3 text-center transition ${mainPath === "events" ? "text-secondary" : "text-white/75 hover:text-white"}`}
+    >
+      <Icon class="h-5 w-5" name="mdi:event"/>
+      <span class="truncate text-[11px] font-semibold">Kegiatan</span>
+    </a>
+    <a
+      href={blogsHref}
+      class={`flex flex-col items-center gap-1 px-3 py-3 text-center transition ${mainPath === "blogs" ? "text-secondary" : "text-white/75 hover:text-white"}`}
+    >
+      <Icon class="h-5 w-5" name="mdi:pen"/>
+      <span class="truncate text-[11px] font-semibold">Blog</span>
+    </a>
+    <a
+      href={aboutHref}
+      class={`flex flex-col items-center gap-1 px-3 py-3 text-center transition ${mainPath === "about" ? "text-secondary" : "text-white/75 hover:text-white"}`}
+    >
+      <Icon class="h-5 w-5" name="mdi:person"/>
+      <span class="truncate text-[11px] font-semibold">Tentang</span>
+    </a>
+  </div>
 </nav>

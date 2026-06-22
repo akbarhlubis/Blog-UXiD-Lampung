@@ -1,37 +1,138 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Icon from "astro-icon";
+import { withBase } from "../lib/url";
+
 const pageTitle = "UXiD Lampung";
+const eventsHref = withBase("/events");
+const blogsHref = withBase("/blogs");
+const aboutHref = withBase("/about");
 ---
+
 <BaseLayout pageTitle={pageTitle}>
-	<!-- Hero Section -->
-	<div class="hero flex-col flex px-20 mt-40 items-center justify-center md:w-2/4 md:mx-auto w-full content-center">
-		<div class="center min-h-screen flex flex-col gap-2">
-			<h1 class="text-white text-sm md:text-lg leading-loose">
-				<b class="text-6xl text-secondary">Halo,</b>
-				<br class="font-light">
-				UXiD Chapter Lampung merupakan komunitas terbuka nirlaba seputar User Experience yang berlokasi di provinsi Lampung.
-			</h1>
-			<div class="flex flex-col text-center gap-2">
-				<button onclick="join.showModal()" class="btn rounded-md hover:bg-secondary hover:text-primary cursor-pointer w-full p-2 font-bold">Gabung UXiD Lampung</button>
-				<dialog id="join" class="modal">
-					<div class="modal-box">
-					  <form method="dialog">
-						<button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-					  </form>
-					  <h3 class="font-bold text-lg">Welcome!</h3>
-					  <div class="JoinGroup justify-center gap-5 flex mt-2">
-						<a class="w-fit flex gap-2 hover:bg-primary rounded-md px-4 py-2 hover:text-white hover:scale-105" href="https://chat.whatsapp.com/C260xWeLjGFFLCFJfl05Wd">
-							<Icon name="mdi:whatsapp" class="w-6 h-6"></Icon>
-							Grup Whatsapp</a>
-						<a class="w-fit flex gap-2 hover:bg-primary rounded-md px-4 py-2 hover:text-white hover:scale-105" href="https://t.me/+H1fuE3uB7eszMWM1">
-							<Icon name="mdi:telegram" class="w-6 h-6"></Icon>
-							Grup Telegram</a>
-					  </div>
+	<div class="mx-auto min-h-screen max-w-7xl px-4 py-10 md:px-8 lg:px-12">
+		<section class="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl shadow-black/20">
+			<div class="grid gap-0 lg:grid-cols-[1.25fr_0.95fr]">
+				<div class="relative px-6 py-12 md:px-10 md:py-16 lg:px-12 lg:py-20">
+					<div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(253,238,92,0.16),_transparent_40%),radial-gradient(circle_at_bottom_right,_rgba(224,21,106,0.24),_transparent_38%)]"></div>
+					<div class="relative space-y-8">
+						<div class="max-w-2xl space-y-5">
+							<p class="text-xs font-bold uppercase tracking-[0.35em] text-secondary">UXiD Lampung</p>
+							<h1 class="text-4xl font-black tracking-tight text-white md:text-6xl">
+								Komunitas UX yang hidup di Lampung.
+							</h1>
+							<p class="max-w-xl text-base leading-7 text-white/75 md:text-lg">
+								Ruang belajar, berbagi, dan bertumbuh untuk desainer, product people, mahasiswa, dan siapa pun yang ingin memahami pengalaman pengguna secara lebih nyata.
+							</p>
+						</div>
+
+						<div class="flex flex-col gap-3 sm:flex-row">
+							<button onclick="join.showModal()" class="btn btn-primary rounded-full px-6 text-white shadow-lg shadow-primary/30">
+								Gabung UXiD Lampung
+							</button>
+							<a href={eventsHref} class="btn btn-outline rounded-full border-white/20 bg-white/5 text-white hover:bg-white/10">
+								Lihat agenda
+							</a>
+						</div>
+
+						<div class="grid gap-3 sm:grid-cols-3">
+							<div class="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+								<p class="text-xs uppercase tracking-[0.3em] text-white/45">Fokus</p>
+								<p class="mt-2 text-sm font-semibold text-white">UX learning by doing</p>
+							</div>
+							<div class="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+								<p class="text-xs uppercase tracking-[0.3em] text-white/45">Format</p>
+								<p class="mt-2 text-sm font-semibold text-white">Event, diskusi, dokumentasi</p>
+							</div>
+							<div class="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+								<p class="text-xs uppercase tracking-[0.3em] text-white/45">Target</p>
+								<p class="mt-2 text-sm font-semibold text-white">Komunitas yang aktif dan terbuka</p>
+							</div>
+						</div>
 					</div>
-				  </dialog>
-				<div class="text-white font-bold">Pelajari Lebih Lanjut > </div>
+				</div>
+
+				<div class="border-t border-white/10 bg-slate-950/50 px-6 py-10 md:px-10 md:py-12 lg:border-l lg:border-t-0">
+					<div class="space-y-4">
+						<div class="rounded-[1.75rem] border border-white/10 bg-white/5 p-6">
+							<p class="text-xs font-bold uppercase tracking-[0.35em] text-secondary">Yang kamu dapat</p>
+							<ul class="mt-5 space-y-4 text-sm leading-6 text-white/75">
+								<li class="flex gap-3">
+									<Icon name="mdi:check-circle-outline" class="mt-0.5 h-5 w-5 text-secondary" />
+									Akses event komunitas yang terkurasi
+								</li>
+								<li class="flex gap-3">
+									<Icon name="mdi:check-circle-outline" class="mt-0.5 h-5 w-5 text-secondary" />
+									Artikel dan arsip belajar yang mudah diakses
+								</li>
+								<li class="flex gap-3">
+									<Icon name="mdi:check-circle-outline" class="mt-0.5 h-5 w-5 text-secondary" />
+									Ruang buat ketemu orang-orang yang punya minat serupa
+								</li>
+							</ul>
+						</div>
+
+						<div class="grid gap-3 sm:grid-cols-2">
+							<a href={blogsHref} class="rounded-[1.5rem] border border-white/10 bg-white/5 p-5 transition hover:bg-white/10">
+								<p class="text-xs font-bold uppercase tracking-[0.3em] text-secondary">Blog</p>
+								<p class="mt-2 text-lg font-bold text-white">Baca insight komunitas</p>
+							</a>
+							<a href={aboutHref} class="rounded-[1.5rem] border border-white/10 bg-white/5 p-5 transition hover:bg-white/10">
+								<p class="text-xs font-bold uppercase tracking-[0.3em] text-secondary">About</p>
+								<p class="mt-2 text-lg font-bold text-white">Kenal lebih dekat</p>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="mt-10 grid gap-5 lg:grid-cols-3">
+			<article class="rounded-3xl border border-white/10 bg-white/5 p-6 text-white">
+				<p class="text-xs font-bold uppercase tracking-[0.3em] text-secondary">Aktif</p>
+				<h2 class="mt-3 text-xl font-bold">Agenda yang terarah</h2>
+				<p class="mt-3 text-sm leading-6 text-white/75">Event ditampilkan sebagai konten hidup, jadi homepage tetap relevan tanpa perlu mengubah layout tiap kali ada agenda baru.</p>
+			</article>
+			<article class="rounded-3xl border border-white/10 bg-white/5 p-6 text-white">
+				<p class="text-xs font-bold uppercase tracking-[0.3em] text-secondary">Rapi</p>
+				<h2 class="mt-3 text-xl font-bold">Struktur konten konsisten</h2>
+				<p class="mt-3 text-sm leading-6 text-white/75">Blog, event, dan about memakai bahasa visual yang sama sehingga pengalaman membaca terasa satu sistem.</p>
+			</article>
+			<article class="rounded-3xl border border-white/10 bg-white/5 p-6 text-white">
+				<p class="text-xs font-bold uppercase tracking-[0.3em] text-secondary">Mudah</p>
+				<h2 class="mt-3 text-xl font-bold">Bergabung tanpa friction</h2>
+				<p class="mt-3 text-sm leading-6 text-white/75">CTA utama langsung mengarahkan ke grup komunitas, bukan sekadar informasi pasif.</p>
+			</article>
+		</section>
+	</div>
+
+	<dialog id="join" class="modal">
+		<div class="modal-box border border-white/10 bg-slate-950 text-white shadow-2xl">
+			<form method="dialog">
+				<button class="btn btn-sm btn-circle btn-ghost absolute right-3 top-3 text-white">✕</button>
+			</form>
+			<div class="space-y-4">
+				<div>
+					<p class="text-xs font-bold uppercase tracking-[0.35em] text-secondary">Gabung Komunitas</p>
+					<h3 class="mt-2 text-2xl font-black">Pilih channel yang paling nyaman.</h3>
+				</div>
+				<div class="grid gap-3">
+					<a class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-4 transition hover:bg-white/10" href="https://chat.whatsapp.com/C260xWeLjGFFLCFJfl05Wd">
+						<Icon name="mdi:whatsapp" class="h-6 w-6 text-secondary" />
+						<div>
+							<p class="font-semibold text-white">Grup WhatsApp</p>
+							<p class="text-sm text-white/60">Diskusi cepat dan update event.</p>
+						</div>
+					</a>
+					<a class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-4 transition hover:bg-white/10" href="https://t.me/+H1fuE3uB7eszMWM1">
+						<Icon name="mdi:telegram" class="h-6 w-6 text-secondary" />
+						<div>
+							<p class="font-semibold text-white">Grup Telegram</p>
+							<p class="text-sm text-white/60">Alternatif channel komunitas.</p>
+						</div>
+					</a>
+				</div>
 			</div>
 		</div>
-	</div>
+	</dialog>
 </BaseLayout>

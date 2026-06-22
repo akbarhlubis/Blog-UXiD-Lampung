@@ -1,20 +1,49 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { withBase } from "../lib/url";
 
 const pageTitle = "About";
+const eventsHref = withBase("/events");
+const blogsHref = withBase("/blogs");
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-	<!-- Blog Section -->
-	<div class="container min-h-screen my-12 mx-auto px-4 md:px-12">
-        <h1 class="text-center text-4xl text-secondary font-black">{pageTitle} Page</h1>
-        <article class="md:w-3/5 w-full mx-auto md:text-base text-sm text-white">
-            <h2 class="mt-10 font-semibold text-lg">Title</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti natus, commodi error alias obcaecati illo nemo fugiat ullam dolores sequi.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti natus, commodi error alias obcaecati illo nemo fugiat ullam dolores sequi.</p>
-            <h2 class="mt-4 font-semibold text-lg">Title</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti natus, commodi error alias obcaecati illo nemo fugiat ullam dolores sequi.</p>
-        </article>
-	</div>
+	<div class="mx-auto min-h-screen max-w-7xl px-4 py-12 md:px-8 lg:px-12">
+		<div class="space-y-10">
+			<PageHeader
+				eyebrow="Tentang"
+				title="UXiD Lampung"
+				description="Komunitas terbuka nirlaba seputar User Experience di Lampung, dengan fokus pada berbagi pengetahuan, jejaring, dan kegiatan praktis."
+				actions={[
+					{ href: eventsHref, label: "Lihat kegiatan", variant: "primary" },
+					{ href: blogsHref, label: "Baca artikel", variant: "ghost" },
+				]}
+			/>
 
+			<div class="grid gap-5 lg:grid-cols-3">
+				<section class="rounded-3xl border border-white/10 bg-white/5 p-6 text-white">
+					<p class="text-xs font-bold uppercase tracking-[0.3em] text-secondary">Misi</p>
+					<h2 class="mt-3 text-xl font-bold">Membuat UX lebih dekat ke komunitas lokal</h2>
+					<p class="mt-3 text-sm leading-6 text-white/75">
+						Kami membangun ruang belajar yang ringan, relevan, dan terbuka untuk siapa saja yang ingin memahami UX secara praktis.
+					</p>
+				</section>
+				<section class="rounded-3xl border border-white/10 bg-white/5 p-6 text-white">
+					<p class="text-xs font-bold uppercase tracking-[0.3em] text-secondary">Fokus</p>
+					<h2 class="mt-3 text-xl font-bold">Event, diskusi, dan dokumentasi</h2>
+					<p class="mt-3 text-sm leading-6 text-white/75">
+						Event akan menjadi sumber data utama dari Google Script. Blog dan konten lain tetap bisa tumbuh dari pola yang sama.
+					</p>
+				</section>
+				<section class="rounded-3xl border border-white/10 bg-white/5 p-6 text-white">
+					<p class="text-xs font-bold uppercase tracking-[0.3em] text-secondary">Audiens</p>
+					<h2 class="mt-3 text-xl font-bold">Pemula sampai praktisi</h2>
+					<p class="mt-3 text-sm leading-6 text-white/75">
+						Cocok untuk mahasiswa, designer, product people, dan siapa pun yang ingin belajar UX tanpa tekanan.
+					</p>
+				</section>
+			</div>
+		</div>
+	</div>
 </BaseLayout>

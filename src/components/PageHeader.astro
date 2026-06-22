@@ -1,0 +1,56 @@
+---
+import { withBase } from "../lib/url";
+
+const {
+  eyebrow,
+  title,
+  description,
+  align = "left",
+  actions = [],
+} = Astro.props as {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  align?: "left" | "center";
+  actions?: { href: string; label: string; variant?: "primary" | "ghost" }[];
+};
+
+const alignmentClass = align === "center" ? "items-center text-center" : "items-start text-left";
+---
+
+<header class={`flex flex-col gap-4 ${alignmentClass}`}>
+  {eyebrow && (
+    <p class="text-xs font-bold uppercase tracking-[0.35em] text-secondary">
+      {eyebrow}
+    </p>
+  )}
+  <div class="max-w-3xl space-y-4">
+    <h1 class="text-4xl font-black tracking-tight text-white md:text-5xl">
+      {title}
+    </h1>
+    {description && (
+      <p class="text-base leading-7 text-white/75 md:text-lg">
+        {description}
+      </p>
+    )}
+  </div>
+  {actions.length > 0 && (
+    <div class="flex flex-wrap gap-3">
+      {actions.map((action) => {
+        const variantClasses =
+          action.variant === "ghost"
+            ? "border border-white/15 bg-white/5 text-white hover:bg-white/10"
+            : "bg-secondary text-slate-950 hover:bg-secondary/90";
+
+        return (
+          <a
+            href={withBase(action.href)}
+            class={`inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-bold transition ${variantClasses}`}
+          >
+            {action.label}
+          </a>
+        );
+      })}
+    </div>
+  )}
+</header>
