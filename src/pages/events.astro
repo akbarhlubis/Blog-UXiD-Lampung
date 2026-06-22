@@ -1,22 +1,28 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import CardEvent from "../components/CardEvent.astro";
+import RuntimeEventFeed from "../components/RuntimeEventFeed.astro";
+import { normalizeEventFeed } from "../lib/event-feed";
 
-const allPosts = await Astro.glob("./events/*.md")
+const allPosts = await Astro.glob("./events/*.md");
+const fallbackItems = normalizeEventFeed(
+	allPosts.map((post) => ({
+		...post.frontmatter,
+		url: post.url,
+	}))
+);
+const eventsEndpoint = import.meta.env.PUBLIC_GOOGLE_SCRIPT_EVENTS_URL ?? "";
 
 const pageTitle = "Event";
 // console.log(allPosts);
 
 ---
 <BaseLayout pageTitle={pageTitle}>
-	<!-- Blog Section -->
-	<div class="container min-h-screen my-12 mx-auto px-4 md:px-12">
-		<h1 class="text-center text-4xl text-secondary font-black">{pageTitle} Page</h1>
-		<div class="flex flex-wrap mt-5 -mx-1 lg:-mx-4">
-			{allPosts.map((post)=>
-				<CardEvent transition:animate="none" image={post.frontmatter.image} title={post.frontmatter.title} category={post.frontmatter.category} url={post.url} pubDate={post.frontmatter.pubDate}/>
-			)}
-		</div>
+	<div class="container min-h-screen mx-auto px-4 py-12 md:px-12">
+		<RuntimeEventFeed
+			title="Agenda dan kegiatan"
+			description="Data event diambil dari Google Script saat halaman dibuka. Jika endpoint belum tersedia, arsip lokal tetap ditampilkan sebagai fallback."
+			endpoint={eventsEndpoint}
+			fallbackItems={fallbackItems}
+		/>
 	</div>
-
 </BaseLayout>

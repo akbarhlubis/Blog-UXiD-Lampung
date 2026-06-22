@@ -1,32 +1,37 @@
 ---
-const platform = "github";
-const username = "akbarhlubis";
+import { withBase } from "../lib/url";
+
+const homeHref = withBase("/");
+const eventsHref = withBase("/events");
+const blogsHref = withBase("/blogs");
+const aboutHref = withBase("/about");
 ---
 
-<footer class="px-14 bg-gray-900 pt-2">
-<!-- This is an footer component -->
-<div class="mt-10">
-  <div class="max-w-2xl py-10 mx-auto text-white">
-      <div class="text-center">
-          <h1 class="mb-3 text-3xl"> Install as <span class="px-2 font-black transition-all rounded-md hover:bg-white hover:text-black animate-pulse">PWA</span> </h1>
-          <p> Stay up to date. All day, every day. </p>
-          <div class="flex justify-center my-10">
-              <div class="flex items-center w-auto px-4 py-2 mx-2 border rounded-lg">
-                  <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/pwa-icon.png" class="w-7 md:w-8">
-                  <div class="ml-3 text-left">
-                      <p class='text-xs text-gray-200'>Let's install your PWA here</p>
-                      <p class="text-sm md:text-base"> PWA: UXiD Lampung </p>
-                  </div>
-              </div>
-          </div>
+<footer class="border-t border-white/10 bg-slate-950 px-6 py-10 text-white md:px-14">
+  <div class="mx-auto flex max-w-6xl flex-col gap-8">
+    <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <div class="space-y-2">
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-secondary">UXiD Lampung</p>
+        <h2 class="text-2xl font-black">Komunitas UX di Lampung</h2>
+        <p class="max-w-2xl text-sm leading-6 text-white/70">
+          Website komunitas, event, dan konten UXiD Lampung. Data event akan mengikuti sumber Google Script saat tersedia.
+        </p>
       </div>
-      <div class="flex flex-col items-center text-sm text-gray-400 mt-28 md:flex-row md:justify-between">
-          <p class="order-2 mt-8 md:order-1 md:mt-0"> &copy; UXiD Lampung, 2023. </p>
-          <div class="order-1 md:order-2">
-              <span class="px-2">About us</span>
-              <span class="px-2 border-l">Event</span>
-          </div>
+      <a
+        class="inline-flex w-fit items-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+        href={homeHref}
+      >
+        Kembali ke beranda
+      </a>
+    </div>
+
+    <div class="flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-white/60 md:flex-row md:items-center md:justify-between">
+      <p>&copy; UXiD Lampung, 2026.</p>
+      <div class="flex flex-wrap gap-4">
+        <a class="hover:text-white" href={eventsHref}>Event</a>
+        <a class="hover:text-white" href={blogsHref}>Blog</a>
+        <a class="hover:text-white" href={aboutHref}>Tentang Kami</a>
       </div>
+    </div>
   </div>
-</div>
 </footer>

@@ -3,8 +3,12 @@ import tailwind from "@astrojs/tailwind";
 // import AstroPWA from '@vite-pwa/astro'
 import alpinejs from "@astrojs/alpinejs";
 
+const repoBase = "/Blog-UXiD-Lampung";
+
 // https://astro.build/config
 export default defineConfig({
+  site: "https://akbarhlubis.github.io/Blog-UXiD-Lampung",
+  base: repoBase,
   integrations: [
     tailwind(), 
     alpinejs(),

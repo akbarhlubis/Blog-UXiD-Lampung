@@ -1,0 +1,136 @@
+---
+import CardEvent from "./CardEvent.astro";
+import { type NormalizedEventItem } from "../lib/event-feed";
+
+const {
+  title = "Event terbaru",
+  description = "Data event ditarik langsung dari Google Script saat halaman dibuka.",
+  endpoint = "",
+  fallbackItems = [],
+} = Astro.props as {
+  title?: string;
+  description?: string;
+  endpoint?: string;
+  fallbackItems?: NormalizedEventItem[];
+};
+
+const normalizedFallback = fallbackItems;
+---
+
+<section
+  data-runtime-event-feed
+  data-endpoint={endpoint}
+  class="space-y-6"
+>
+  <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+    <div class="space-y-2">
+      <p class="text-xs font-bold uppercase tracking-[0.3em] text-secondary">Live content</p>
+      <h2 class="text-2xl font-black text-white md:text-3xl">{title}</h2>
+      <p class="max-w-2xl text-sm leading-6 text-white/80">{description}</p>
+    </div>
+    <div
+      data-feed-status
+      class="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold text-white"
+    >
+      {endpoint ? "Menyambungkan ke data live..." : "Menampilkan arsip lokal"}
+    </div>
+  </div>
+
+  <div
+    data-feed-list
+    class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3"
+  >
+    {normalizedFallback.length > 0 ? (
+      normalizedFallback.map((item) => (
+        <CardEvent
+          title={item.title}
+          pubDate={item.pubDate}
+          category={item.category}
+          url={item.url}
+          image={item.image}
+        />
+      ))
+    ) : (
+      <div
+        data-feed-empty
+        class="col-span-full rounded-2xl border border-white/10 bg-white/5 p-6 text-sm leading-6 text-white/75"
+      >
+        Belum ada data event untuk ditampilkan.
+      </div>
+    )}
+  </div>
+
+  <div
+    data-feed-empty-state
+    class="hidden rounded-2xl border border-white/10 bg-white/5 p-6 text-sm leading-6 text-white/75"
+  >
+    Belum ada data event yang valid dari Google Script.
+  </div>
+</section>
+
+<script type="module" define:vars={{ endpoint }}>
+  import { normalizeEventFeed, renderEventCardHtml } from "../lib/event-feed";
+
+  const root = document.querySelector("[data-runtime-event-feed]");
+
+  if (!(root instanceof HTMLElement)) {
+    throw new Error("RuntimeEventFeed root element not found");
+  }
+
+  const statusEl = root.querySelector("[data-feed-status]");
+  const listEl = root.querySelector("[data-feed-list]");
+  const emptyStateEl = root.querySelector("[data-feed-empty-state]");
+
+  const setStatus = (message) => {
+    if (statusEl instanceof HTMLElement) {
+      statusEl.textContent = message;
+    }
+  };
+
+  const setEmptyStateVisible = (visible) => {
+    if (emptyStateEl instanceof HTMLElement) {
+      emptyStateEl.classList.toggle("hidden", !visible);
+    }
+  };
+
+  const renderCards = (items) => {
+    if (!(listEl instanceof HTMLElement)) {
+      return;
+    }
+
+    listEl.innerHTML = items.map((item) => renderEventCardHtml(item)).join("");
+    setEmptyStateVisible(items.length === 0);
+  };
+
+  if (!endpoint) {
+    setStatus("Menampilkan arsip lokal");
+    setEmptyStateVisible(false);
+  } else {
+    setStatus("Memuat data live...");
+
+    try {
+      const response = await fetch(endpoint, {
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const payload = await response.json();
+      const liveItems = normalizeEventFeed(payload);
+
+      if (liveItems.length > 0) {
+        renderCards(liveItems);
+        setStatus(`Data live dimuat ${liveItems.length} event`);
+        setEmptyStateVisible(false);
+      } else {
+        setStatus("Data live kosong, tetap menampilkan arsip lokal");
+      }
+    } catch (error) {
+      setStatus("Gagal memuat data live, tetap menampilkan arsip lokal");
+    }
+  }
+</script>

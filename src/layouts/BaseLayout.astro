@@ -1,26 +1,23 @@
 ---
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
-import { ViewTransitions } from 'astro:transitions';
-import { pwaInfo } from 'virtual:pwa-info';
+import { withBase } from "../lib/url";
 
 const {pageTitle} = Astro.props;
+const faviconHref = withBase("/favicon.svg");
 ---
 
-<html lang="en" class="scroll-smooth">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={faviconHref} />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet"
     />
-    <!-- <ViewTransitions /> -->
     <title>{pageTitle}</title>
-    <script src="/src/pwa.ts"></script>
-    { pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
 </head>
 <body class="bg-primary font-QuickSand">
 	<!-- Navigation -->

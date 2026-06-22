@@ -1,47 +1,85 @@
-# Astro Starter Kit: Minimal
+# UXiD Lampung
 
-```
-npm create astro@latest -- --template minimal
-```
+Website komunitas UXiD Lampung berbasis Astro.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+## Ringkas
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- Halaman utama, blog, dan about masih memakai struktur konten lokal Astro/markdown.
+- Halaman event sudah disiapkan untuk menarik data runtime dari Google Script di browser.
+- Jika endpoint Google Script belum diisi, halaman event akan memakai arsip lokal sebagai fallback aman.
 
-## 🚀 Project Structure
+## Konfigurasi Event Runtime
 
-Inside of your Astro project, you'll see the following folders and files:
+Set environment variable berikut saat ingin menyalakan data live:
 
-```
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+PUBLIC_GOOGLE_SCRIPT_EVENTS_URL=https://script.google.com/macros/s/....../exec?sheet=event
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### Bentuk payload yang didukung
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Loader event menerima payload dalam salah satu bentuk berikut:
 
-Any static assets, like images, can be placed in the `public/` directory.
+- Array langsung: `[{ ...event }]`
+- Object dengan properti array: `{ items: [...] }`
+- Object dengan properti array lain seperti `data`, `results`, `events`, atau `records`
 
-## 🧞 Commands
+### Field yang dikenali
 
-All commands are run from the root of the project, from a terminal:
+- `title`
+- `category`
+- `description`
+- `image`
+- `pubDate`
+- `url`
+- `link`
+- `formLink`
+- `detailUrl`
+- `ctaUrl`
+- `slug`
+- `id`
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Field yang paling penting untuk tampilan event adalah `title`, `pubDate`, dan salah satu target URL.
 
-## 👀 Want to learn more?
+## GitHub Pages
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Repository ini disiapkan untuk deploy ke GitHub Pages.
+
+- Base path Astro sudah diarahkan ke `/Blog-UXiD-Lampung`
+- Site URL mengikuti `https://akbarhlubis.github.io/Blog-UXiD-Lampung`
+- Build output yang dipublish adalah folder `dist/`
+
+Jika kamu mengganti nama repo atau custom domain, update konfigurasi Astro sebelum deploy.
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## Preview
+
+```bash
+npm run preview
+```
+
+## Struktur Utama
+
+- `src/pages` - route Astro dan halaman konten
+- `src/components` - komponen UI reusable
+- `src/layouts` - layout halaman dan layout markdown
+- `src/lib` - helper base URL, slug, dan event feed normalization
+- `public` - asset statis untuk site
+
+## Catatan Teknis
+
+- Event runtime memakai fetch di browser, bukan server-side rendering.
+- Layout markdown event dan blog sudah memakai slug TOC yang stabil.
+- PWA lama sudah dibersihkan dari layout utama.
